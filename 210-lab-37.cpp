@@ -2,6 +2,7 @@
 // IDE used: CLion
 
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 // sum_ascii() receives a single string and returns the sum of that string's characters' ASCII values
@@ -10,6 +11,7 @@ using namespace std;
 int sum_ascii(string);
 
 int main() {
+	/* MILESTONE 1
 	char a = 'A';
 	string a_string = "A";
 	string test1 = "CAT";
@@ -28,6 +30,27 @@ int main() {
 	int b = 66;
 	cout << b << endl;
 	cout << (char) b << endl;
+	*/
+
+	// MILESTONE 2
+	int sum = 0;
+	int target_sum = 69893419;
+	string temp;
+	ifstream infile;
+	infile.open("lab-37-data.txt");
+
+	if (infile.good()) {
+		while (infile >> temp)
+			sum += sum_ascii(temp);
+	} else {
+		cout << "Error opening file";
+		exit(2);
+	}
+
+	if (sum == target_sum)
+		cout << "The sum matches the target sum.";
+	else
+		cout << "The sums do not match. The target sum was " << target_sum << " and the actual sum was " << sum;
 
 	return 0;
 }
