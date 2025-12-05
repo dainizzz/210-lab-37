@@ -37,6 +37,7 @@ int main() {
 	int target_sum = 69893419;
 	string temp;
 	ifstream infile;
+
 	infile.open("lab-37-data.txt");
 
 	if (infile.good()) {
