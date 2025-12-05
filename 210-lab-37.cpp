@@ -10,6 +10,11 @@ using namespace std;
 // returns: an int sum of the string's characters' ASCII values
 int sum_ascii(string);
 
+// gen_hash_index() receives a string and returns the hash index for that string.
+// arguments: a string
+// returns: an int hash index
+int gen_hash_index(string);
+
 int main() {
 	/* MILESTONE 1
 	char a = 'A';
@@ -34,6 +39,7 @@ int main() {
 
 	// MILESTONE 2
 	int sum = 0;
+	int count = 0;
 	int target_sum = 69893419;
 	string temp;
 	ifstream infile;
@@ -41,8 +47,10 @@ int main() {
 	infile.open("lab-37-data.txt");
 
 	if (infile.good()) {
-		while (infile >> temp)
+		while (infile >> temp) {
 			sum += sum_ascii(temp);
+			count++;
+		}
 	} else {
 		cout << "Error opening file";
 		exit(2);
@@ -52,6 +60,8 @@ int main() {
 		cout << "The sum matches the target sum.";
 	else
 		cout << "The sums do not match. The target sum was " << target_sum << " and the actual sum was " << sum;
+
+	cout << sum / count << endl;
 
 	return 0;
 }
@@ -71,4 +81,10 @@ int sum_ascii(string str) {
 	}
 
 	return sum;
+}
+
+int gen_hash_index(string str) {
+	int sum = sum_ascii(str);
+
+	return sum % 97;
 }
