@@ -14,12 +14,13 @@ int main() {
 	string a_string = "A";
 	string test1 = "CAT";
 	string test2 = "apple";
-	int test1_calc = 0;
-	int test2_calc = 0;
+	int test1_calc = 216;
+	int test2_calc = 530;
 	int test1_actual = sum_ascii(test1);
 	int test2_actual = sum_ascii(test2);
 
 	cout << test1 << ": " << test1_calc << " = " << test1_actual << endl;
+	cout << test2 << ": " << test2_calc << " = " << test2_actual << endl;
 
 	cout << a << endl;
 	cout << (int) a << endl;
