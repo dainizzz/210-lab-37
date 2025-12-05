@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <map>
+#include <list>
 using namespace std;
 
 // sum_ascii() receives a single string and returns the sum of that string's characters' ASCII values
@@ -16,52 +18,21 @@ int sum_ascii(string);
 int gen_hash_index(string);
 
 int main() {
-	/* MILESTONE 1
-	char a = 'A';
-	string a_string = "A";
-	string test1 = "CAT";
-	string test2 = "apple";
-	int test1_calc = 216;
-	int test2_calc = 530;
-	int test1_actual = sum_ascii(test1);
-	int test2_actual = sum_ascii(test2);
-
-	cout << test1 << ": " << test1_calc << " = " << test1_actual << endl;
-	cout << test2 << ": " << test2_calc << " = " << test2_actual << endl;
-
-	cout << a << endl;
-	cout << (int) a << endl;
-	cout << sum_ascii(a_string) << endl;
-	int b = 66;
-	cout << b << endl;
-	cout << (char) b << endl;
-	*/
-
-	// MILESTONE 2
-	int sum = 0;
-	int count = 0;
-	int target_sum = 69893419;
 	string temp;
 	ifstream infile;
+	// KEY: hash index	VALUE: linked list of codes from file
+	map<int, std::list<string>> hash_table;
 
 	infile.open("lab-37-data.txt");
 
 	if (infile.good()) {
 		while (infile >> temp) {
-			sum += sum_ascii(temp);
-			count++;
+			// add temp to hash table
 		}
 	} else {
 		cout << "Error opening file";
 		exit(2);
 	}
-
-	if (sum == target_sum)
-		cout << "The sum matches the target sum.";
-	else
-		cout << "The sums do not match. The target sum was " << target_sum << " and the actual sum was " << sum;
-
-	cout << sum / count << endl;
 
 	return 0;
 }
@@ -86,5 +57,7 @@ int sum_ascii(string str) {
 int gen_hash_index(string str) {
 	int sum = sum_ascii(str);
 
-	return sum % 97;
+	// This number was chosen for this hash function because the average summed ASCII value for the strings was 697,
+	// and 2^9 = 512 & 2^10 = 1024.
+	return sum % 617;
 }
