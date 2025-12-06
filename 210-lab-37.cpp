@@ -58,7 +58,6 @@ int main() {
 	map<int, list<string> > hash_table;
 
 	infile.open("lab-37-data.txt");
-
 	if (infile.good()) {
 		while (infile >> temp) {
 			int hashIndex = gen_hash_index(temp);
@@ -81,14 +80,7 @@ int main() {
 		cout << "Error opening file";
 		exit(2);
 	}
-
-	// TESTING
-	// print_first_100_entries(hash_table);
-	// string test = "536B9DFC93AF";
-	// bool search_test = search_for_key(test, hash_table);
-	// if (search_test) {
-	// 	cout << "The search function works." << endl;
-	// }
+	infile.close();
 
 	bool displayMenu = true;
 	while (displayMenu) {
@@ -100,9 +92,13 @@ int main() {
 			case 2:
 				search_for_key(hash_table);
 				break;
-			case 3:
-				// add
+			case 3: {
+				string key;
+				cout << "Enter the key:";
+				cin >> key;
+				add_key(key, hash_table);
 				break;
+			}
 			case 4:
 				// remove
 				break;
@@ -207,6 +203,19 @@ bool find_key(string key, map<int, list<string> > &hash_table) {
 }
 
 void add_key(string key, map<int, list<string> > &hash_table) {
+	if (!find_key(key, hash_table)) {
+		int hashIndex = gen_hash_index(key);
+
+		auto search = hash_table.find(hashIndex);
+		if (search != hash_table.end()) {
+			search->second.push_front(key);
+		} else {
+			list<string> newList(1, key);
+			hash_table.insert(make_pair(hashIndex, newList));
+		}
+	} else {
+		cout << "Key \"" << key << "\" is already in the hash table." << endl;
+	}
 }
 
 void remove_key(string key, map<int, list<string> > &hash_table) {
