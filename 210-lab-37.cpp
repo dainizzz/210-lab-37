@@ -229,12 +229,15 @@ void remove_key(map<int, list<string> > &hash_table) {
 	string key;
 	cout << "Enter the key:";
 	cin >> key;
+
 	if (delete_key(key, hash_table))
 		cout << "Key \"" << key << "\" deleted from the hash table." << endl;
 	else
 		cout << "Key \"" << key << "\" was already not the in hash table." << endl;
 }
 
+// Since both remove_key() and modify_key() need to remove items from the linked lists in the hash table, they both call
+// this helper function which handles the logic of actually removing the key
 bool delete_key(string key, map<int, list<string> > &hash_table) {
 	if (find_key(key, hash_table)) {
 		int hashIndex = gen_hash_index(key);
@@ -243,6 +246,7 @@ bool delete_key(string key, map<int, list<string> > &hash_table) {
 		while (*it != key) {
 			++it;
 		}
+		search->second.erase(it);
 		return true;
 	}
 	return false;
