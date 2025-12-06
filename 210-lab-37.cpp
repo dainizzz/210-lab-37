@@ -61,7 +61,6 @@ void modify_key(map<int, list<string> > &);
 int main() {
 	string temp;
 	ifstream infile;
-	// KEY: hash index	VALUE: linked list of codes from file at that hash index
 	map<int, list<string> > hash_table;
 
 	infile.open("lab-37-data.txt");
@@ -69,17 +68,11 @@ int main() {
 		while (infile >> temp) {
 			int hashIndex = gen_hash_index(temp);
 
-			// check if key exists
 			auto search = hash_table.find(hashIndex);
 			if (search != hash_table.end()) {
-				// if it does,
-				// add the new temp value to the front of the linked list
 				search->second.push_front(temp);
 			} else {
-				// if key does not exist,
-				// make a new linked list and have temp as the head
 				list<string> newList(1, temp);
-				// make_pair() of hash index + temp value and insert()
 				hash_table.insert(make_pair(hashIndex, newList));
 			}
 		}
@@ -109,7 +102,7 @@ int main() {
 				modify_key(hash_table);
 				break;
 			case 6:
-				//displayMenu = false;
+				displayMenu = false;
 				break;
 			// Default case will not occur since the menu() function validates user input
 			default:
