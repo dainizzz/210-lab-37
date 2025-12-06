@@ -23,28 +23,28 @@ int menu();
 // values stored at those hash indexes
 // arguments: a hash table of type map<int, list<string>>
 // returns: nothing
-void print_first_100_entries(map<int, list<string>> &);
+void print_first_100_entries(map<int, list<string> > &);
 
 
 // search_for_key() searches the hash table for the provided key
 // arguments: the string key being searched for, a hash table of type map<int, list<string>> to be searched
 // returns: a bool value signifying whether the string was found
-bool search_for_key(string, map<int, list<string>> &);
+bool search_for_key(string, map<int, list<string> > &);
 
 // add_key() adds a key to the hash table
 // arguments: the string key being added, a hash table of type map<int, list<string>> the key is being added to
 // returns: nothing
-void add_key(string, map<int, list<string>> &);
+void add_key(string, map<int, list<string> > &);
 
 // remove_key() removes a key from the hash table
 // arguments: the string key being removed, a hash table of type map<int, list<string>> the key is being removed from
 // returns: nothing
-void remove_key(string, map<int, list<string>> &);
+void remove_key(string, map<int, list<string> > &);
 
 // modify_key() modifies a key in the hash table
 // arguments: the string key being modified, a hash table of type map<int, list<string>> the modified key is in
 // returns: nothing
-void modify_key(string, map<int, list<string>> &);
+void modify_key(string, map<int, list<string> > &);
 
 int main() {
 	string temp;
@@ -60,10 +60,12 @@ int main() {
 
 			// check if key exists
 			auto search = hash_table.find(hashIndex);
-			if (search != hash_table.end()) { // if it does,
+			if (search != hash_table.end()) {
+				// if it does,
 				// add the new temp value to the front of the linked list
 				search->second.push_front(temp);
-			} else { // if key does not exist,
+			} else {
+				// if key does not exist,
 				// make a new linked list and have temp as the head
 				list<string> newList(1, temp);
 				// make_pair() of hash index + temp value and insert()
@@ -76,7 +78,12 @@ int main() {
 	}
 
 	// TESTING
-	print_first_100_entries(hash_table);
+	// print_first_100_entries(hash_table);
+	string test = "536B9DFC93AF";
+	bool search_test = search_for_key(test, hash_table);
+	if (search_test) {
+		cout << "The search function works." << endl;
+	}
 
 	bool displayMenu = true;
 	while (displayMenu) {
@@ -149,7 +156,7 @@ int menu() {
 	return choice;
 }
 
-void print_first_100_entries(map<int, list<string>> & hash_table) {
+void print_first_100_entries(map<int, list<string> > &hash_table) {
 	int counter = 0;
 	auto it = hash_table.begin();
 	while (counter < 100) {
@@ -164,14 +171,28 @@ void print_first_100_entries(map<int, list<string>> & hash_table) {
 	}
 }
 
-bool search_for_key(string key, map<int, list<string>> & hash_table) {
+bool search_for_key(string key, map<int, list<string> > &hash_table) {
+	int hashIndex = gen_hash_index(key);
+	auto search = hash_table.find(hashIndex);
+	if (search != hash_table.end()) {
+		for (auto item: search->second) {
+			if (key == item) {
+				// If key == item, that means the key was found in the hash table
+				return true;
+			}
+		}
+	}
+
+	// If the hash index wasn't already in the map, or if the index was in the map and none of the keys matched the
+	// string being searched, the key does not exist in the map.
+	return false;
 }
 
-void add_key(string key, map<int, list<string>> & hash_table) {
+void add_key(string key, map<int, list<string> > &hash_table) {
 }
 
-void remove_key(string key, map<int, list<string>> & hash_table) {
+void remove_key(string key, map<int, list<string> > &hash_table) {
 }
 
-void modify_key(string key, map<int, list<string>> & hash_table) {
+void modify_key(string key, map<int, list<string> > &hash_table) {
 }
