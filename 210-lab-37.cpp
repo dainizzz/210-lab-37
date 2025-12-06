@@ -5,12 +5,33 @@
 #include <fstream>
 #include <map>
 #include <list>
+#include <limits>
 using namespace std;
 
 // gen_hash_index() receives a string and returns the hash index for that string.
 // arguments: a string
 // returns: an int hash index
 int gen_hash_index(string);
+
+// menu() displays the menu options for printing the first 100 entries, searching for a key, adding a key, removing a
+// key, modifying a key, and exiting the program. It validates the user's input and returns the user's choice as an int.
+// arguments: none
+// returns: an int value representing the user's menu choice
+int menu();
+
+// print_first_100_entries() prints the first 100 entries (i.e. keys in the std::map) in the hash table along with the
+// values stored at those hash indexes
+// arguments: a hash table of type map<int, list<string>>
+// returns: nothing
+void print_first_100_entries(map<int, std::list<string>> &);
+
+bool search_for_key(string, map<int, std::list<string>> &);
+
+void add_key(string, map<int, std::list<string>> &);
+
+void remove_key(string, map<int, std::list<string>> &);
+
+void modify_key(string, map<int, std::list<string>> &);
 
 int main() {
 	string temp;
@@ -77,4 +98,23 @@ int gen_hash_index(string str) {
 	// and 2^9 = 512 & 2^10 = 1024. I also did some testing with other prime numbers between 617-971 and this seemed
 	// to have the best distribution (i.e. smaller "buckets") compared to the other numbers used for testing.
 	return sum % 761;
+}
+
+int menu() {
+	int choice;
+
+	cout << "Please make a selection:" << endl;
+	cout << "\t1. Print the first 100 entries" << endl;
+	cout << "\t2. Search for a key" << endl;
+	cout << "\t3. Add a key" << endl;
+	cout << "\t4. Remove a key" << endl;
+	cout << "\t5. Modify a key" << endl;
+	cout << "\t6. Exit" << endl;
+	while (!(cin >> choice) || choice < 1 || choice > 6) {
+		cout << "Invalid input. Please enter a number between 1 and 6." << endl;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
+
+	return choice;
 }
