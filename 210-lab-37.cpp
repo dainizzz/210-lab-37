@@ -23,21 +23,34 @@ int menu();
 // values stored at those hash indexes
 // arguments: a hash table of type map<int, list<string>>
 // returns: nothing
-void print_first_100_entries(map<int, std::list<string>> &);
+void print_first_100_entries(map<int, list<string>> &);
 
-bool search_for_key(string, map<int, std::list<string>> &);
 
-void add_key(string, map<int, std::list<string>> &);
+// search_for_key() searches the hash table for the provided key
+// arguments: the string key being searched for, a hash table of type map<int, list<string>> to be searched
+// returns: a bool value signifying whether the string was found
+bool search_for_key(string, map<int, list<string>> &);
 
-void remove_key(string, map<int, std::list<string>> &);
+// add_key() adds a key to the hash table
+// arguments: the string key being added, a hash table of type map<int, list<string>> the key is being added to
+// returns: nothing
+void add_key(string, map<int, list<string>> &);
 
-void modify_key(string, map<int, std::list<string>> &);
+// remove_key() removes a key from the hash table
+// arguments: the string key being removed, a hash table of type map<int, list<string>> the key is being removed from
+// returns: nothing
+void remove_key(string, map<int, list<string>> &);
+
+// modify_key() modifies a key in the hash table
+// arguments: the string key being modified, a hash table of type map<int, list<string>> the modified key is in
+// returns: nothing
+void modify_key(string, map<int, list<string>> &);
 
 int main() {
 	string temp;
 	ifstream infile;
 	// KEY: hash index	VALUE: linked list of codes from file at that hash index
-	map<int, std::list<string> > hash_table;
+	map<int, list<string> > hash_table;
 
 	infile.open("lab-37-data.txt");
 
