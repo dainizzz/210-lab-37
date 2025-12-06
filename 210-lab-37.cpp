@@ -1,4 +1,4 @@
-// COMSC-210 | Lab 37 | Dainiz Almazan
+// COMSC-210 | Lab 38 | Dainiz Almazan
 // IDE used: CLion
 
 #include <iostream>
