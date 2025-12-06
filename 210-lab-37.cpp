@@ -108,7 +108,7 @@ int main() {
 				modify_key(hash_table);
 				break;
 			case 6:
-				displayMenu = false;
+				//displayMenu = false;
 				break;
 			// Default case will not occur since the menu() function validates user input
 			default:
@@ -206,7 +206,7 @@ bool find_key(string key, map<int, list<string> > &hash_table) {
 
 void add_key(map<int, list<string> > &hash_table) {
 	string key;
-	cout << "Enter the key:";
+	cout << "Enter the key: ";
 	cin >> key;
 
 	if (!find_key(key, hash_table)) {
@@ -227,7 +227,7 @@ void add_key(map<int, list<string> > &hash_table) {
 
 void remove_key(map<int, list<string> > &hash_table) {
 	string key;
-	cout << "Enter the key:";
+	cout << "Enter the key: ";
 	cin >> key;
 
 	if (delete_key(key, hash_table))
@@ -253,4 +253,26 @@ bool delete_key(string key, map<int, list<string> > &hash_table) {
 }
 
 void modify_key(map<int, list<string> > &hash_table) {
+	string original_key, new_key;
+	cout << "Enter the key you want to modify: ";
+	cin >> original_key;
+	cout << "Enter the new value of the key: ";
+	cin >> new_key;
+	if (find_key(original_key, hash_table)) {
+		if (!find_key(new_key, hash_table)) {
+			delete_key(original_key, hash_table);
+
+			int hashIndex = gen_hash_index(new_key);
+			auto search = hash_table.find(hashIndex);
+			if (search != hash_table.end()) {
+				search->second.push_front(new_key);
+			} else {
+				list<string> newList(1, new_key);
+				hash_table.insert(make_pair(hashIndex, newList));
+			}
+		} else
+			cout << "\"" << new_key << "\" is already in the hash table." << endl;
+	} else {
+		cout << "Key \"" << original_key << "\" is not in the hash table." << endl;
+	}
 }
