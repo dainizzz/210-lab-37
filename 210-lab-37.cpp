@@ -36,10 +36,10 @@ void search_for_key(map<int, list<string> > &);
 // returns: a bool value signifying whether the string was found
 bool find_key(string, map<int, list<string> > &);
 
-// add_key() adds a key to the hash table
+// add_key() prompts the user for a key and adds it to the hash table if it's not already present.
 // arguments: the string key being added, a hash table of type map<int, list<string>> the key is being added to
 // returns: nothing
-void add_key(string, map<int, list<string> > &);
+void add_key(map<int, list<string> > &);
 
 // remove_key() removes a key from the hash table
 // arguments: the string key being removed, a hash table of type map<int, list<string>> the key is being removed from
@@ -92,13 +92,9 @@ int main() {
 			case 2:
 				search_for_key(hash_table);
 				break;
-			case 3: {
-				string key;
-				cout << "Enter the key:";
-				cin >> key;
-				add_key(key, hash_table);
+			case 3:
+				add_key(hash_table);
 				break;
-			}
 			case 4:
 				// remove
 				break;
@@ -202,7 +198,11 @@ bool find_key(string key, map<int, list<string> > &hash_table) {
 	return false;
 }
 
-void add_key(string key, map<int, list<string> > &hash_table) {
+void add_key(map<int, list<string> > &hash_table) {
+	string key;
+	cout << "Enter the key:";
+	cin >> key;
+
 	if (!find_key(key, hash_table)) {
 		int hashIndex = gen_hash_index(key);
 
@@ -213,6 +213,7 @@ void add_key(string key, map<int, list<string> > &hash_table) {
 			list<string> newList(1, key);
 			hash_table.insert(make_pair(hashIndex, newList));
 		}
+		cout << "Key \"" << key << "\" was added to the hash table." << endl;
 	} else {
 		cout << "Key \"" << key << "\" is already in the hash table." << endl;
 	}
