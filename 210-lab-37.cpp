@@ -46,6 +46,11 @@ void add_key(map<int, list<string> > &);
 // returns: nothing
 void remove_key(map<int, list<string> > &);
 
+// delete_key() deletes a key from the hash table and returns a value signifying whether the key was removed or not
+// arguments: a key to remove, a hash table of type map<int, list<string>> to remove the key from
+// returns: a bool value signifying whether the key was removed
+bool delete_key(string, map<int, list<string> > &);
+
 // modify_key() prompts the user for a key and the new value the key should be updated to, and modifies the key if it is
 // present in the hash table.
 // arguments: a hash table of type map<int, list<string>> the modified key is in
@@ -220,8 +225,28 @@ void add_key(map<int, list<string> > &hash_table) {
 	}
 }
 
-void remove_key(string key, map<int, list<string> > &hash_table) {
+void remove_key(map<int, list<string> > &hash_table) {
+	string key;
+	cout << "Enter the key:";
+	cin >> key;
+	if (delete_key(key, hash_table))
+		cout << "Key \"" << key << "\" deleted from the hash table." << endl;
+	else
+		cout << "Key \"" << key << "\" was already not the in hash table." << endl;
 }
 
-void modify_key(string key, map<int, list<string> > &hash_table) {
+bool delete_key(string key, map<int, list<string> > &hash_table) {
+	if (find_key(key, hash_table)) {
+		int hashIndex = gen_hash_index(key);
+		auto search = hash_table.find(hashIndex);
+		auto it = search->second.begin();
+		while (*it != key) {
+			++it;
+		}
+		return true;
+	}
+	return false;
+}
+
+void modify_key(map<int, list<string> > &hash_table) {
 }
