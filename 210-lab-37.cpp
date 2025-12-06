@@ -31,6 +31,11 @@ void print_first_100_entries(map<int, list<string> > &);
 // returns: nothing
 void search_for_key(map<int, list<string> > &);
 
+// find_key() searches the hash table for the provided key and returns a bool value signifying whether the key was found
+// arguments: the string key being searched for, a hash table of type map<int, list<string>> to be searched
+// returns: a bool value signifying whether the string was found
+bool find_key(string, map<int, list<string> > &);
+
 // add_key() adds a key to the hash table
 // arguments: the string key being added, a hash table of type map<int, list<string>> the key is being added to
 // returns: nothing
@@ -45,11 +50,6 @@ void remove_key(string, map<int, list<string> > &);
 // arguments: the string key being modified, a hash table of type map<int, list<string>> the modified key is in
 // returns: nothing
 void modify_key(string, map<int, list<string> > &);
-
-// find_key() searches the hash table for the provided key and returns a bool value signifying whether the key was found
-// arguments: the string key being searched for, a hash table of type map<int, list<string>> to be searched
-// returns: a bool value signifying whether the string was found
-bool find_key(string, map<int, list<string> > &);
 
 int main() {
 	string temp;
@@ -97,10 +97,9 @@ int main() {
 			case 1:
 				print_first_100_entries(hash_table);
 				break;
-			case 2: {
-
+			case 2:
+				search_for_key(hash_table);
 				break;
-			}
 			case 3:
 				// add
 				break;
@@ -129,7 +128,6 @@ These targets are present in the dataset and can be used for testing:
 666D109AA22E
 E1D2665B21EA
 */
-
 
 int gen_hash_index(string str) {
 	int sum = 0;
