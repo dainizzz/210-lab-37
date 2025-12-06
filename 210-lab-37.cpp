@@ -20,14 +20,25 @@ int gen_hash_index(string);
 int main() {
 	string temp;
 	ifstream infile;
-	// KEY: hash index	VALUE: linked list of codes from file
+	// KEY: hash index	VALUE: linked list of codes from file at that hash index
 	map<int, std::list<string>> hash_table;
 
 	infile.open("lab-37-data.txt");
 
 	if (infile.good()) {
 		while (infile >> temp) {
-			// add temp to hash table
+			int hashIndex = gen_hash_index(temp);
+
+			// check if key exists
+			auto search = hash_table.find(hashIndex);
+			if (search != hash_table.end()) {
+				// if it does, use iter->second to access the linked list
+				// add the new temp value to the front of the linked list
+			}else { // if key does not exist,
+				// make a new linked list and have temp as the head
+				// make_pair() of hash index + temp value and insert()
+			}
+
 		}
 	} else {
 		cout << "Error opening file";
