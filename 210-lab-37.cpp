@@ -50,17 +50,22 @@ int main() {
 
 	// TESTING
 	int counter = 0;
+	int count_entries = 0;
 	auto it = hash_table.begin();
 	while (counter < 100) {
 		++it;
 		cout << it->first << ": \t";
-		for (auto item: it->second) {
-			cout << item << " ";
-		}
+		cout << it->second.size();
+		count_entries += it->second.size();
+		// for (auto item: it->second) {
+		// 	cout << item << " ";
+		// }
 		cout << endl << endl;
 
 		counter++;
 	}
+
+	cout << "Total entries: " << count_entries << endl;
 
 	return 0;
 }
@@ -87,5 +92,8 @@ int gen_hash_index(string str) {
 
 	// This number was chosen for this hash function because the average summed ASCII value for the strings was 697,
 	// and 2^9 = 512 & 2^10 = 1024.
-	return sum % 617;
+	// return sum % 617;
+	// return sum % 701;
+	// return sum % 709;
+	return sum % 719;
 }
