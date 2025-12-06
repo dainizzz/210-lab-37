@@ -21,7 +21,7 @@ int main() {
 	string temp;
 	ifstream infile;
 	// KEY: hash index	VALUE: linked list of codes from file at that hash index
-	map<int, std::list<string>> hash_table;
+	map<int, std::list<string> > hash_table;
 
 	infile.open("lab-37-data.txt");
 
@@ -35,13 +35,13 @@ int main() {
 				// if it does, use iter->second to access the linked list
 				// add the new temp value to the front of the linked list
 				search->second.push_front(temp);
-			}else { // if key does not exist,
+			} else {
+				// if key does not exist,
 				// make a new linked list and have temp as the head
 				list<string> newList(1, temp);
 				// make_pair() of hash index + temp value and insert()
 				hash_table.insert(make_pair(hashIndex, newList));
 			}
-
 		}
 	} else {
 		cout << "Error opening file";
@@ -53,10 +53,11 @@ int main() {
 	auto it = hash_table.begin();
 	while (counter < 100) {
 		++it;
-		cout << it->first;
-		for (auto item : it->second) {
-			cout << item;
+		cout << it->first << ": \t";
+		for (auto item: it->second) {
+			cout << item << " ";
 		}
+		cout << endl << endl;
 
 		counter++;
 	}
@@ -74,7 +75,7 @@ E1D2665B21EA
 
 int sum_ascii(string str) {
 	int sum = 0;
-	for (char letter : str) {
+	for (char letter: str) {
 		sum += (int) letter;
 	}
 
