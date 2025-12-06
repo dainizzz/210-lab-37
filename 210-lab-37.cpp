@@ -34,15 +34,31 @@ int main() {
 			if (search != hash_table.end()) {
 				// if it does, use iter->second to access the linked list
 				// add the new temp value to the front of the linked list
+				search->second.push_front(temp);
 			}else { // if key does not exist,
 				// make a new linked list and have temp as the head
+				list<string> newList(1, temp);
 				// make_pair() of hash index + temp value and insert()
+				hash_table.insert(make_pair(hashIndex, newList));
 			}
 
 		}
 	} else {
 		cout << "Error opening file";
 		exit(2);
+	}
+
+	// TESTING
+	int counter = 0;
+	auto it = hash_table.begin();
+	while (counter < 100) {
+		++it;
+		cout << it->first;
+		for (auto item : it->second) {
+			cout << item;
+		}
+
+		counter++;
 	}
 
 	return 0;
