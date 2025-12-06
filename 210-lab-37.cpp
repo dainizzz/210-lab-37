@@ -75,18 +75,35 @@ int main() {
 		exit(2);
 	}
 
-	// DISPLAYING FIRST 100 MAP ENTRIES
-	int counter = 0;
-	auto it = hash_table.begin();
-	while (counter < 100) {
-		cout << "HASH INDEX " << it->first << ':' << endl;
-		for (auto item: it->second) {
-			cout << item << " ";
-		}
-		cout << endl << endl;
+	// TESTING
+	print_first_100_entries(hash_table);
 
-		++it;
-		counter++;
+	bool displayMenu = true;
+	while (displayMenu) {
+		int choice = menu();
+		switch (choice) {
+			case 1:
+				print_first_100_entries(hash_table);
+				break;
+			case 2:
+				// search
+				break;
+			case 3:
+				// add
+				break;
+			case 4:
+				// remove
+				break;
+			case 5:
+				// modify
+				break;
+			case 6:
+				displayMenu = false;
+				break;
+			// Default case will not occur since the menu() function validates user input
+			default:
+				break;
+		}
 	}
 
 	return 0;
@@ -130,4 +147,31 @@ int menu() {
 	}
 
 	return choice;
+}
+
+void print_first_100_entries(map<int, list<string>> & hash_table) {
+	int counter = 0;
+	auto it = hash_table.begin();
+	while (counter < 100) {
+		cout << "HASH INDEX " << it->first << ':' << endl;
+		for (auto item: it->second) {
+			cout << item << " ";
+		}
+		cout << endl << endl;
+
+		++it;
+		counter++;
+	}
+}
+
+bool search_for_key(string key, map<int, list<string>> & hash_table) {
+}
+
+void add_key(string key, map<int, list<string>> & hash_table) {
+}
+
+void remove_key(string key, map<int, list<string>> & hash_table) {
+}
+
+void modify_key(string key, map<int, list<string>> & hash_table) {
 }
