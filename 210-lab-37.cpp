@@ -258,8 +258,14 @@ void modify_key(map<int, list<string> > &hash_table) {
 	cin >> original_key;
 	cout << "Enter the new value of the key: ";
 	cin >> new_key;
+	// If the key does not already exist, it can't be modified.
 	if (find_key(original_key, hash_table)) {
+		// If the modified value of the is already in the hash table, it shouldn't be added again.
 		if (!find_key(new_key, hash_table)) {
+			// Modifying the key at the hash index it currently exists in would make it impossible to find later, so
+			// instead, the original key gets deleted, and a new key is added at the appropriate hash index. This way,
+			// when the user searches for the modified key value, the gen_hash_index() function will provide the
+			// correct hash index for that key.
 			delete_key(original_key, hash_table);
 
 			int hashIndex = gen_hash_index(new_key);
