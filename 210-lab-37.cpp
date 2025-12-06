@@ -41,15 +41,16 @@ bool find_key(string, map<int, list<string> > &);
 // returns: nothing
 void add_key(map<int, list<string> > &);
 
-// remove_key() removes a key from the hash table
-// arguments: the string key being removed, a hash table of type map<int, list<string>> the key is being removed from
+// remove_key() prompts the user for a key and removes it from the hash table
+// arguments: a hash table of type map<int, list<string>> the key is being removed from
 // returns: nothing
-void remove_key(string, map<int, list<string> > &);
+void remove_key(map<int, list<string> > &);
 
-// modify_key() modifies a key in the hash table
-// arguments: the string key being modified, a hash table of type map<int, list<string>> the modified key is in
+// modify_key() prompts the user for a key and the new value the key should be updated to, and modifies the key if it is
+// present in the hash table.
+// arguments: a hash table of type map<int, list<string>> the modified key is in
 // returns: nothing
-void modify_key(string, map<int, list<string> > &);
+void modify_key(map<int, list<string> > &);
 
 int main() {
 	string temp;
@@ -96,10 +97,10 @@ int main() {
 				add_key(hash_table);
 				break;
 			case 4:
-				// remove
+				remove_key(hash_table);
 				break;
 			case 5:
-				// modify
+				modify_key(hash_table);
 				break;
 			case 6:
 				displayMenu = false;
