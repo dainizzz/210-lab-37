@@ -6,6 +6,7 @@
 #include <map>
 #include <list>
 #include <limits>
+
 using namespace std;
 
 // gen_hash_index() receives a string and returns the hash index for that string.
