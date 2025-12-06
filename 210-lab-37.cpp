@@ -7,11 +7,6 @@
 #include <list>
 using namespace std;
 
-// sum_ascii() receives a single string and returns the sum of that string's characters' ASCII values
-// arguments: a string
-// returns: an int sum of the string's characters' ASCII values
-int sum_ascii(string);
-
 // gen_hash_index() receives a string and returns the hash index for that string.
 // arguments: a string
 // returns: an int hash index
@@ -31,12 +26,10 @@ int main() {
 
 			// check if key exists
 			auto search = hash_table.find(hashIndex);
-			if (search != hash_table.end()) {
-				// if it does, use iter->second to access the linked list
+			if (search != hash_table.end()) { // if it does,
 				// add the new temp value to the front of the linked list
 				search->second.push_front(temp);
-			} else {
-				// if key does not exist,
+			} else { // if key does not exist,
 				// make a new linked list and have temp as the head
 				list<string> newList(1, temp);
 				// make_pair() of hash index + temp value and insert()
@@ -48,17 +41,17 @@ int main() {
 		exit(2);
 	}
 
-	// TESTING
+	// DISPLAYING FIRST 100 MAP ENTRIES
 	int counter = 0;
 	auto it = hash_table.begin();
 	while (counter < 100) {
-		++it;
-		cout << it->first << ": \t";
+		cout << "HASH INDEX " << it->first << ':' << endl;
 		for (auto item: it->second) {
 			cout << item << " ";
 		}
 		cout << endl << endl;
 
+		++it;
 		counter++;
 	}
 
@@ -73,19 +66,15 @@ These targets are present in the dataset and can be used for testing:
 E1D2665B21EA
 */
 
-int sum_ascii(string str) {
+
+int gen_hash_index(string str) {
 	int sum = 0;
 	for (char letter: str) {
 		sum += (int) letter;
 	}
 
-	return sum;
-}
-
-int gen_hash_index(string str) {
-	int sum = sum_ascii(str);
-
 	// This number was chosen for this hash function because the average summed ASCII value for the strings was 697,
-	// and 2^9 = 512 & 2^10 = 1024.
+	// and 2^9 = 512 & 2^10 = 1024. I also did some testing with other prime numbers between 617-971 and this seemed
+	// to have the best distribution (i.e. smaller "buckets") compared to the other numbers used for testing.
 	return sum % 761;
 }
