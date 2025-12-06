@@ -25,11 +25,11 @@ int menu();
 // returns: nothing
 void print_first_100_entries(map<int, list<string> > &);
 
-
-// search_for_key() searches the hash table for the provided key
-// arguments: the string key being searched for, a hash table of type map<int, list<string>> to be searched
-// returns: a bool value signifying whether the string was found
-bool search_for_key(string, map<int, list<string> > &);
+// search_for_key() prompts the user for a key, searches the hash table for the provided key, and outputs a message
+// saying whether the key was found or not.
+// arguments: a hash table of type map<int, list<string>> to be searched
+// returns: nothing
+void search_for_key(map<int, list<string> > &);
 
 // add_key() adds a key to the hash table
 // arguments: the string key being added, a hash table of type map<int, list<string>> the key is being added to
@@ -45,6 +45,11 @@ void remove_key(string, map<int, list<string> > &);
 // arguments: the string key being modified, a hash table of type map<int, list<string>> the modified key is in
 // returns: nothing
 void modify_key(string, map<int, list<string> > &);
+
+// find_key() searches the hash table for the provided key and returns a bool value signifying whether the key was found
+// arguments: the string key being searched for, a hash table of type map<int, list<string>> to be searched
+// returns: a bool value signifying whether the string was found
+bool find_key(string, map<int, list<string> > &);
 
 int main() {
 	string temp;
@@ -79,11 +84,11 @@ int main() {
 
 	// TESTING
 	// print_first_100_entries(hash_table);
-	string test = "536B9DFC93AF";
-	bool search_test = search_for_key(test, hash_table);
-	if (search_test) {
-		cout << "The search function works." << endl;
-	}
+	// string test = "536B9DFC93AF";
+	// bool search_test = search_for_key(test, hash_table);
+	// if (search_test) {
+	// 	cout << "The search function works." << endl;
+	// }
 
 	bool displayMenu = true;
 	while (displayMenu) {
@@ -92,9 +97,10 @@ int main() {
 			case 1:
 				print_first_100_entries(hash_table);
 				break;
-			case 2:
-				// search
+			case 2: {
+
 				break;
+			}
 			case 3:
 				// add
 				break;
@@ -171,7 +177,21 @@ void print_first_100_entries(map<int, list<string> > &hash_table) {
 	}
 }
 
-bool search_for_key(string key, map<int, list<string> > &hash_table) {
+void search_for_key(map<int, list<string> > &hash_table) {
+	string search_key;
+	cout << "Enter search key: ";
+	cin >> search_key;
+
+	bool found = find_key(search_key, hash_table);
+	cout << "Key \"" << search_key << "\"";
+	if (found)
+		cout << " found in hash table." << endl;
+	else
+		cout << " not found." << endl;
+}
+
+// Since several functions need to know whether a key exists or not, this helper function handles that logic.
+bool find_key(string key, map<int, list<string> > &hash_table) {
 	int hashIndex = gen_hash_index(key);
 	auto search = hash_table.find(hashIndex);
 	if (search != hash_table.end()) {
