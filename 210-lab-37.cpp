@@ -256,10 +256,10 @@ void modify_key(map<int, list<string> > &hash_table) {
 	string original_key, new_key;
 	cout << "Enter the key you want to modify: ";
 	cin >> original_key;
-	cout << "Enter the new value of the key: ";
-	cin >> new_key;
 	// If the key does not already exist, it can't be modified.
 	if (find_key(original_key, hash_table)) {
+		cout << "Enter the new value of the key: ";
+		cin >> new_key;
 		// If the modified value of the is already in the hash table, it shouldn't be added again.
 		if (!find_key(new_key, hash_table)) {
 			// Modifying the key at the hash index it currently exists in would make it impossible to find later, so
